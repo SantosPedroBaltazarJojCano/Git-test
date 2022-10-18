@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ControlHacha : MonoBehaviour
+{
+	ControlPersonaje ctr;
+    // Start is called before the first frame update
+    void Start()
+    {
+		ctr = GameObject.Find ("orc").GetComponent<ControlPersonaje> ();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+	void OnTriggerEnter2D(Collider2D other){
+		if (other.gameObject.name.Equals ("arbolv2")) {
+			ctr.SetControlarbol (other.gameObject.GetComponent<Controlarbol> ());
+		}
+	
+	}
+	void OnTriggerExit2D(Collider2D other){
+		if(other.gameObject.name.Equals ("arbolv2")){
+			ctr.SetControlarbol (null);
+		}
+	}
+}

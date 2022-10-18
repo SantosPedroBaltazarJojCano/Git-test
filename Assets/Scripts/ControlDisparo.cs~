@@ -1,0 +1,61 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ControlDisparo : MonoBehaviour
+{
+	Collider2D disparandoA = null;
+	public float probabilidaddeDisparo = 1f;
+	//Bala
+
+	ControlEnemigo ctr;
+	//
+    // Start is called before the first frame update
+	//float f1;
+
+
+
+    void Start()
+	{
+		/*//Generador
+		InvokeRepeating("Generate", 0f,0.75f);*/
+		ctr = GameObject.Find ("enemigo_0").GetComponent<ControlEnemigo>();
+    }
+
+	void OnTriggerEnter2D (Collider2D other){
+		if(other.gameObject.name.Equals("arbolv2") && disparandoA == null){
+			DecidaSiDispara (other);
+		}
+		if(other.gameObject.name.Equals("orc") && disparandoA == null){
+			Disparar ();
+			disparandoA = other;
+		}
+	}
+
+	void onTriggerExit2D (Collider2D other){
+		if(other == disparandoA){
+			disparandoA = null;
+		}
+	}
+	/*
+	//Generador
+	public void Generate(){
+		f1 = Random.value;
+	}
+	*/
+	void DecidaSiDispara(Collider2D other){
+		if (Random.value < probabilidaddeDisparo) {
+			Disparar ();
+			disparandoA = other;
+		}
+		/*if( < probabilidaddeDisparo){
+			Disparar ( );
+			disparandoA = other;
+		}*/
+	}
+
+	void Disparar( ){
+		ctr.Disparar();
+	}
+
+}
